@@ -1,0 +1,165 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.search-box::placeholder{
+    color: rgb(119, 153, 255);
+}
+
+.search-box::-webkit-input-placeholder{
+    color: rgb(119, 153, 255);
+}
+
+.search-box::-moz-placeholder{
+    color: rgb(119, 153, 255);
+}
+.grid-box{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-auto-rows: 100px;
+    overflow-y: scroll;
+    gap: 10px;
+
+    -webkit-backdrop-filter: blur(5px);
+    background-color: white;
+    scroll-behavior: smooth;
+    grid-auto-flow: row dense;
+    backdrop-filter: red;
+}
+.large{
+    display: block;
+    grid-row: span 4;
+    display: block;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+
+}
+.mid{
+    display: block;
+    grid-row: span 2;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+}
+.empty-holder{
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.empty-holder div{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+.empty-holder img{
+    width: 300px;
+    height: 300px;
+}
+.loader-view{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    backdrop-filter: blur(10px);
+}
+.not-found{
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+
+}
+.not-found img{
+    width: 300px;
+    height: 300px;
+}
+.not-found div{
+    height: fit-content;
+    width: fit-content;
+}
+.error{
+    width: 100vw;
+    height: 100vh;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.error div{
+    width: 40vw;
+    height: fit-content;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+
+}
+.reload-btn{
+    padding: 3px;
+    border-radius: 3px;
+    background-color: rgb(5, 199, 5);
+    color: white;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 45px;
+
+    aspect-ratio: .75;
+    --c:no-repeat linear-gradient(#000 0 0);
+    background:
+      var(--c) 0%   100%,
+      var(--c) 50%  100%,
+      var(--c) 100% 100%;
+    background-size: 20% 65%;
+    animation: l8 1s infinite linear;
+  }
+  @keyframes l8 {
+    16.67% {background-position: 0% 0%  ,50% 100%,100% 100%}
+    33.33% {background-position: 0% 0%  ,50% 0%  ,100% 100%}
+    50%    {background-position: 0% 0%  ,50% 0%  ,100% 0%  }
+    66.67% {background-position: 0% 100%,50% 0%  ,100% 0%  }
+    83.33% {background-position: 0% 100%,50% 100%,100% 0%  }
+  }
+
+
+
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+  }
+  .spinner::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #FFF;
+    animation: prixClipFix 2s linear infinite ;
+  }
+
+  @keyframes rotate {
+    100%   {transform: rotate(360deg)}
+  }
+
+  @keyframes prixClipFix {
+      0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+  }

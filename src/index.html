@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <script defer src="./index.js"></script>
+  </head>
+  <body class="bg-primary">
+    <div id = 'content-page'
+      style="
+
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 20px;
+
+      "
+    >
+      <div
+        class="d-flex  py-1 align-items-center px-3 m-2 bg-white rounded-4 shadow-sm foucs mx-auto"
+
+        style="width: 70vw; backdrop-filter: blur(10px); top: 10px; position:sticky;"
+      >
+        <img
+          style="width: 2rem; height: 2rem"
+          class="object-fit-contain"
+          src="../assets/searchIcon.svg"
+        />
+        <input
+          id="search-box"
+          style="width: 70vw; outline: none"
+          class=" bg-transparent search-box border-0 px-3 py-2 d-block text-primary"
+          type=" text"
+          placeholder=" Search Img...."
+        />
+        <button  class=" px-2 py-1 rounded-2 bg-primary border-0 text-white"  id="search-btn">Search</button>
+      </div>
+
+      <div id = 'result-container' class=" h-100 d-flex flex-column justify-content-center align-items-center">
+
+        <div id="grid-box" class="mx-5 my-2 grid-box  rounded p-4">
+
+        </div>
+        <div id ='spinner' class=" d-none spinner"></div>
+      </div>
+
+
+
+
+      <div id="empty" class="empty-holder ">
+        <div>
+          <img src="../assets/glass.png" />
+          <h5 class="text-primary">search image 😊</h5>
+        </div>
+      </div>
+
+      <div id  = "no-result-found" class=" not-found" >
+        <div class=" rounded bg-white" >
+          <img src="../assets/cart.png">
+        </div>
+      </div>
+
+    </div>
+    <div id = "error-page" class="error shadow-lg  ">
+      <div>
+        <h2>😔sorry Something went wrong ❌</h2>
+        <button id= 'reload-btn' class=" reload-btn">Reload</button>
+      </div>
+
+    </div>
+    <div id="loader" class="loader-view">
+
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>
