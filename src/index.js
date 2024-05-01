@@ -15,20 +15,18 @@ let itemLeft = true;
 let isLoading = false;
 let searchContent = "";
 
-loader.classList.add('d-none')
+loader.classList.add("d-none");
 not_found.style.display = "none";
 error_page.style.display = "none";
 result_container.classList.add("d-none");
 
 searchBox.addEventListener("keypress", keyPress);
 
-
 reload_btn.addEventListener("click", () => {
   location.reload();
 });
 
-
-window.addEventListener("scroll", (e) => {
+window.addEventListener("scroll", () => {
   page++;
   if (
     window.scrollY + window.innerHeight >=
@@ -36,17 +34,17 @@ window.addEventListener("scroll", (e) => {
     itemLeft &&
     !isLoading
   ) {
-
     LoadMore();
     spinner.classList.remove("d-none");
-
   }
 });
 
 function keyPress(e) {
   itemLeft = true;
+
   if (e.key === "Enter") {
     searchContent = e.target.value;
+    if (searchContent === "") return;
     searchClick();
     e.target.value = "";
   }
@@ -123,13 +121,11 @@ async function appendChilds() {
     if (index % 2 !== 0) element.classList.add("mid");
     grid_box.appendChild(element);
   });
-
-  result_container.classList.remove("d-none");
 }
 async function searchClick() {
   not_found.style.display = "none";
 
-  loader.classList.remove('d-none')
+  loader.classList.remove("d-none");
   try {
     await appendChilds();
     empty_div.style.display = "none";
@@ -140,11 +136,13 @@ async function searchClick() {
 
     throw new Error("something went wrong");
   } finally {
-    loader.classList.add('d-none')
+    loader.classList.add("d-none");
   }
+  result_container.classList.remove("d-none");
 }
 searchBtn.addEventListener("click", (e) => {
   searchContent = searchBox.value;
+  if (searchContent === "") return;
   searchClick();
   searchBox.value = "";
 });
