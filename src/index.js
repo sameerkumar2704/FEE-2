@@ -1,4 +1,4 @@
-const apiKey = "oHnT7mKzRlhIPFjjwII_W-aOo0IS2ptcZ3CBt2PfJ8w";
+const apiKey = "KfD-qYa7SArwneH7-scPP5BXMY22C-pgr7mSiJovuQI";
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
 const grid_box = document.getElementById("grid-box");
@@ -12,28 +12,37 @@ const result_container = document.getElementById("result-container");
 const spinner = document.getElementById("spinner");
 let page = 1;
 let itemLeft = true;
+let isLoading = false;
 let searchContent = "";
 
-loader.style.display = "none";
+loader.classList.add('d-none')
 not_found.style.display = "none";
 error_page.style.display = "none";
 result_container.classList.add("d-none");
 
 searchBox.addEventListener("keypress", keyPress);
+
+
 reload_btn.addEventListener("click", () => {
   location.reload();
 });
+
+
 window.addEventListener("scroll", (e) => {
   page++;
   if (
     window.scrollY + window.innerHeight >=
       document.documentElement.scrollHeight &&
-    itemLeft
+    itemLeft &&
+    !isLoading
   ) {
+
     LoadMore();
     spinner.classList.remove("d-none");
+
   }
 });
+
 function keyPress(e) {
   itemLeft = true;
   if (e.key === "Enter") {
@@ -42,6 +51,7 @@ function keyPress(e) {
     e.target.value = "";
   }
 }
+
 async function getData(query) {
   const url = `https://api.unsplash.com/search/photos?page=${page}&query=${query}&per_page=12&client_id=${apiKey}`;
   let data = await fetch(url);
@@ -51,6 +61,7 @@ async function getData(query) {
 }
 async function LoadMore() {
   if (!itemLeft) return;
+  isLoading = true;
   try {
     const data = await getData(searchContent);
     const img = data.map((curr) => createImage(curr.urls.small));
@@ -64,6 +75,7 @@ async function LoadMore() {
   } catch (e) {
     itemLeft = false;
   } finally {
+    isLoading = false;
     spinner.classList.add("d-none");
   }
 }
@@ -78,9 +90,9 @@ function createImage(image) {
 }
 async function appendChilds() {
   page = 1;
-  if (searchBox.value === "") {
+  if (searchContent === "") {
     not_found.style.display = "flex";
-    result_container.classList.remove("d-none");
+    result_container.classList.add("d-none");
 
     return;
   }
@@ -113,26 +125,22 @@ async function appendChilds() {
   });
 
   result_container.classList.remove("d-none");
-
 }
 async function searchClick() {
   not_found.style.display = "none";
 
-  loader.style.display = "flex";
+  loader.classList.remove('d-none')
   try {
     await appendChilds();
     empty_div.style.display = "none";
-
-    loader.style.display = "none";
   } catch (err) {
-    console.log(exception);
     content_page.style.display = "none";
     error_page.style.display = "flex";
-
-    loader.style.display = "none";
     itemLeft = false;
 
     throw new Error("something went wrong");
+  } finally {
+    loader.classList.add('d-none')
   }
 }
 searchBtn.addEventListener("click", (e) => {
