@@ -1,4 +1,4 @@
-const apiKey = "KfD-qYa7SArwneH7-scPP5BXMY22C-pgr7mSiJovuQI";
+const apiKey = "xgtEKyCrr7pGas3ys5kw904A7roQvor1igCO1f2Sxrk";
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
 const grid_box = document.getElementById("grid-box");
@@ -19,6 +19,7 @@ loader.classList.add("d-none");
 not_found.style.display = "none";
 error_page.style.display = "none";
 result_container.classList.add("d-none");
+
 
 searchBox.addEventListener("keypress", keyPress);
 
@@ -43,6 +44,7 @@ function keyPress(e) {
   itemLeft = true;
 
   if (e.key === "Enter") {
+
     searchContent = e.target.value;
     if (searchContent === "") return;
     searchClick();
@@ -81,6 +83,7 @@ function createImage(image) {
   const ImageHolder = document.createElement("img");
   ImageHolder.src = image;
   ImageHolder.alt = "tem";
+  ImageHolder.loading = 'lazy'
   ImageHolder.classList.add("rounded");
 
   ImageHolder.classList.add("large");
@@ -102,13 +105,16 @@ async function appendChilds() {
     } catch (e) {
       not_found.style.display = "flex";
       spinner.classList.add("d-none");
+      result_container.classList.add("d-none");
+      grid_box.classList.add('d-none')
       itemLeft = false;
     }
   }
   if (data.length === 0) {
     not_found.style.display = "flex";
     spinner.classList.add("d-none");
-    result_container.classList.add("d-none");
+    result_container.classList.add('d-none')
+
     itemLeft = false;
 
     return;
@@ -121,6 +127,7 @@ async function appendChilds() {
     if (index % 2 !== 0) element.classList.add("mid");
     grid_box.appendChild(element);
   });
+
 }
 async function searchClick() {
   not_found.style.display = "none";
@@ -128,7 +135,11 @@ async function searchClick() {
   loader.classList.remove("d-none");
   try {
     await appendChilds();
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     empty_div.style.display = "none";
+    result_container.classList.remove("d-none");
+    console.log('load')
   } catch (err) {
     content_page.style.display = "none";
     error_page.style.display = "flex";
@@ -136,9 +147,11 @@ async function searchClick() {
 
     throw new Error("something went wrong");
   } finally {
+    console.log('done')
     loader.classList.add("d-none");
+
   }
-  result_container.classList.remove("d-none");
+
 }
 searchBtn.addEventListener("click", (e) => {
   searchContent = searchBox.value;

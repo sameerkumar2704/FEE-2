@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./index.css" />
     <script defer src="./index.js"></script>
   </head>
-  <body class="bg-primary">
+  <body class="bg-primary " >
     <div id = 'content-page'
       style="
 
@@ -27,6 +27,7 @@
           style="width: 2rem; height: 2rem"
           class="object-fit-contain"
           src="../assets/searchIcon.svg"
+
         />
         <input
           id="search-box"
@@ -38,9 +39,9 @@
         <button  class=" px-2 py-1 rounded-2 bg-primary border-0 text-white"  id="search-btn">Search</button>
       </div>
 
-      <div id = 'result-container' class=" h-100 d-flex flex-column justify-content-center align-items-center">
+      <div id = 'result-container' class=" px-5 py-3 h-100 d-flex flex-column justify-content-center align-items-center">
 
-        <div id="grid-box" class="mx-5 my-2 grid-box  rounded p-4">
+        <div id="grid-box" class="  w-100   my-2 grid-box  rounded p-4">
 
         </div>
         <div id ='spinner' class=" d-none spinner"></div>
@@ -70,9 +71,9 @@
       </div>
 
     </div>
-    <div id="loader" class="loader-view d-flex d-none">
+    <div id="loader" class="loader-view ">
 
-      <div class="loader"></div>
+      <span class="loader"></span>
     </div>
   </body>
 </html>
